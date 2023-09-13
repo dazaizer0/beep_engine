@@ -18,6 +18,7 @@ void PLAY(double frequency, int duration) {
     Beep(static_cast<int>(frequency), duration);
 #else
     for (int i = 0; i < duration * 1000; i += period) {
+
         std::cout << "\a"; // play sound
         std::this_thread::sleep_for(std::chrono::microseconds(static_cast<int>(period)));
     }
@@ -29,7 +30,6 @@ public:
 
     SOUND() : frequency(0.0), duration(0) {} // Konstruktor domyślny
     SOUND(double f, int d) : frequency(f), duration(d) {}
-
 
     double getFrequency() const {
 
@@ -80,20 +80,5 @@ int main() {
     }
 
     PLAY_SOUNDS(SOUNDS);
-    /*
-    std::vector<std::thread> threads;
-    for (const auto& sound : SOUNDS) {
-
-        threads.push_back(std::thread([sound]() {
-
-            PLAY(sound.second.getFrequency(), sound.second.getDuration());
-            }));
-    }
-
-    for (auto& thread : threads) {
-
-        thread.join();
-    }
-    */
     return 0;
 }
