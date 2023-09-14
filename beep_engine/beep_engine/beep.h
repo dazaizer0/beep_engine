@@ -2,8 +2,8 @@
 #include <map>
 #include <chrono>
 #include <thread>
-#include <atomic>
 #include <conio.h>
+#include <cstdlib>
 
 #ifdef _WIN32
 #include <Windows.h>

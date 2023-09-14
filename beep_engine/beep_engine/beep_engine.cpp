@@ -79,7 +79,7 @@ void BEEP_MAP() { // beepengine option 1
 void BEEPBOARD() { // beepengine option 2
 
     int base_frequency = 300;
-    std::string hello_message = "<- base_frequency, beepboard[play = [f, g, h, j, k], tone_controls[i, o], quit[q]] beepboard <- opt2";
+    std::string hello_message = "<- base_frequency, beepboard[play = [f, g, h, j, k], tone_controls[+, -], quit[/]] beepboard <- opt2";
 
     std::cout << base_frequency;
     for (int i = 0; i < hello_message.length(); i++) {
@@ -89,61 +89,77 @@ void BEEPBOARD() { // beepengine option 2
     std::cout << std::endl;
 
     char key;
+    int counter = 0;
     while (true) {
         if (_kbhit()) {  // check if key have been pressed
             key = _getch();  // get key
 
             if (key == 'F' || key == 'f') {
                 PLAY(base_frequency, 720);
-                std::cout << "f, \n";
+                std::cout << "f, ";
             }
 
             if (key == 'G' || key == 'g') {
                 PLAY(base_frequency + 150, 720);
-                std::cout << "g, \n";
+                std::cout << "g, ";
             }
 
             if (key == 'H' || key == 'h') {
                 PLAY(base_frequency + 300, 720);
-                std::cout << "h, \n";
+                std::cout << "h, ";
             }
 
             if (key == 'J' || key == 'j') {
                 PLAY(base_frequency + 450, 720);
-                std::cout << "j, \n";
+                std::cout << "j, ";
             }
 
             if (key == 'K' || key == 'k') {
                 PLAY(base_frequency + 550, 720);
-                std::cout << "k, \n";
+                std::cout << "k, ";
             }
 
-            if (key == 'I' || key == 'i') {
+            if (key == '+') {
                 if (base_frequency < 1000) {
                     base_frequency += 100;
-                    std::cout << "i = up, bf = " << base_frequency << std::endl;
+                    std::cout << "i = up, bf = " << base_frequency << ", ";
                 }
                 else {
-                    std::cout << "i = none, bf = " << base_frequency << std::endl;
+                    std::cout << "i = none, bf = " << base_frequency << ", ";
                 }
             }
 
-            if (key == 'O' || key == 'o') {
+            if (key == '-') {
                 if (base_frequency > 200) {
                     base_frequency -= 100;
-                    std::cout << "o = down, bf = " << base_frequency << std::endl;
+                    std::cout << "o = down, bf = " << base_frequency << ", ";
                 }
                 else {
-                    std::cout << "o = none, bf = " << base_frequency << std::endl;
+                    std::cout << "o = none, bf = " << base_frequency << ", ";
                 }
             }
 
-            if (key == 'q') {
-                std::cout << "quit...";
+            if (key == '/') {
                 break;
             }
+
+            if (counter >= 12) {
+                std::cout << std::endl;
+                counter = 0;
+            }
+
+            counter += 1;
         }
     }
+}
+
+void CLEAR_TERMINAL() {
+
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
 }
 
 
@@ -161,9 +177,13 @@ int main() {
 
     switch (option) {
     case 1:
+        CLEAR_TERMINAL();
         BEEP_MAP();
+        break;
     case 2:
+        CLEAR_TERMINAL();
         BEEPBOARD();
+        break;
     default:
         break;
     }
