@@ -1,13 +1,4 @@
-﻿#include <iostream>
-#include <map>
-#include <chrono>
-#include <thread>
-
-#ifdef _WIN32
-#include <Windows.h>
-#else
-#include <unistd.h>
-#endif
+﻿#include "beep.h"
 
 
 void PLAY(double frequency, int duration) {
@@ -18,7 +9,6 @@ void PLAY(double frequency, int duration) {
     Beep(static_cast<int>(frequency), duration);
 #else
     for (int i = 0; i < duration * 1000; i += period) {
-
         std::cout << "\a"; // play sound
         std::this_thread::sleep_for(std::chrono::microseconds(static_cast<int>(period)));
     }
@@ -28,16 +18,14 @@ void PLAY(double frequency, int duration) {
 class SOUND {
 public:
 
-    SOUND() : frequency(0.0), duration(0) {} // Konstruktor domyślny
+    SOUND() : frequency(0.0), duration(0) {} // default sound constructor
     SOUND(double f, int d) : frequency(f), duration(d) {}
 
     double getFrequency() const {
-
         return frequency;
     }
 
     int getDuration() const {
-
         return duration;
     }
 
@@ -50,21 +38,27 @@ private:
 void PLAY_SOUNDS(std::map<int, SOUND> SOUNDS) {
 
     for (const auto& sound : SOUNDS) {
-
         PLAY(sound.second.getFrequency(), sound.second.getDuration());
     }
 }
 
-int main() {
+void BEEP_MAP() { // beepengine option 1
 
     std::map<int, SOUND> SOUNDS;
     int length;
+
+    std::string hello_message = "beep_map <- opt2";
+
+    for (int i = 0; i < hello_message.length(); i++) {
+        std::cout << hello_message[i];
+        Sleep(25);
+    }
+    std::cout << std::endl;
 
     std::cout << "Length of sounds map: ";
     std::cin >> length;
 
     for (int i = 0; i < length; i++) {
-
         double frequency;
         int duration;
 
@@ -80,5 +74,98 @@ int main() {
     }
 
     PLAY_SOUNDS(SOUNDS);
+}
+
+void BEEPBOARD() { // beepengine option 2
+
+    int base_frequency = 300;
+    std::string hello_message = "<- base_frequency, beepboard[play = [f, g, h, j, k], tone_controls[i, o], quit[q]] beepboard <- opt2";
+
+    std::cout << base_frequency;
+    for (int i = 0; i < hello_message.length(); i++) {
+        std::cout << hello_message[i];
+        Sleep(25);
+    }
+    std::cout << std::endl;
+
+    char key;
+    while (true) {
+        if (_kbhit()) {  // check if key have been pressed
+            key = _getch();  // get key
+
+            if (key == 'F' || key == 'f') {
+                PLAY(base_frequency, 720);
+                std::cout << "f, \n";
+            }
+
+            if (key == 'G' || key == 'g') {
+                PLAY(base_frequency + 150, 720);
+                std::cout << "g, \n";
+            }
+
+            if (key == 'H' || key == 'h') {
+                PLAY(base_frequency + 300, 720);
+                std::cout << "h, \n";
+            }
+
+            if (key == 'J' || key == 'j') {
+                PLAY(base_frequency + 450, 720);
+                std::cout << "j, \n";
+            }
+
+            if (key == 'K' || key == 'k') {
+                PLAY(base_frequency + 550, 720);
+                std::cout << "k, \n";
+            }
+
+            if (key == 'I' || key == 'i') {
+                if (base_frequency < 1000) {
+                    base_frequency += 100;
+                    std::cout << "i = up, bf = " << base_frequency << std::endl;
+                }
+                else {
+                    std::cout << "i = none, bf = " << base_frequency << std::endl;
+                }
+            }
+
+            if (key == 'O' || key == 'o') {
+                if (base_frequency > 200) {
+                    base_frequency -= 100;
+                    std::cout << "o = down, bf = " << base_frequency << std::endl;
+                }
+                else {
+                    std::cout << "o = none, bf = " << base_frequency << std::endl;
+                }
+            }
+
+            if (key == 'q') {
+                std::cout << "quit...";
+                break;
+            }
+        }
+    }
+}
+
+
+int main() {
+
+    int option;
+    std::string hello_message = "[1 - beep_map], [2 - beepboard]: ";
+
+    for (int i = 0; i < hello_message.length(); i++) {
+        std::cout << hello_message[i];
+        Sleep(25);
+    }
+    std::cout << std::endl;
+    std::cin >> option;
+
+    switch (option) {
+    case 1:
+        BEEP_MAP();
+    case 2:
+        BEEPBOARD();
+    default:
+        break;
+    }
     return 0;
 }

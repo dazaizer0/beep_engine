@@ -19,4 +19,9 @@
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="beep.h">
+      <Filter>Pliki źródłowe</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
