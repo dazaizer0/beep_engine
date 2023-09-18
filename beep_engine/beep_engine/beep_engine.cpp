@@ -76,7 +76,7 @@ void BEEP_MAP() { // beepengine option 1
     PLAY_SOUNDS(SOUNDS);
 }
 
-void BEEPBOARD() { // beepengine option 2
+void BEEPBOARD(std::string sh) { // beepengine option 2
 
     int base_frequency = 300;
     std::string hello_message = "<- base_frequency, beepboard[play = [f, g, h, j, k], tone_controls[+, -], quit[/]] beepboard <- opt2";
@@ -97,26 +97,31 @@ void BEEPBOARD() { // beepengine option 2
             if (key == 'F' || key == 'f') {
                 PLAY(base_frequency, 720);
                 std::cout << "f, ";
+                sh += "f,";
             }
 
             if (key == 'G' || key == 'g') {
                 PLAY(base_frequency + 150, 720);
                 std::cout << "g, ";
+                sh += "g,";
             }
 
             if (key == 'H' || key == 'h') {
                 PLAY(base_frequency + 300, 720);
                 std::cout << "h, ";
+                sh += "h,";
             }
 
             if (key == 'J' || key == 'j') {
                 PLAY(base_frequency + 450, 720);
                 std::cout << "j, ";
+                sh += "j,";
             }
 
             if (key == 'K' || key == 'k') {
                 PLAY(base_frequency + 550, 720);
                 std::cout << "k, ";
+                sh += "k,";
             }
 
             if (key == '+') {
@@ -166,6 +171,7 @@ void CLEAR_TERMINAL() {
 int main() {
 
     int option;
+    std::string sounds_history = "";
     std::string hello_message = "[1 - beep_map], [2 - beepboard]: ";
 
     for (int i = 0; i < hello_message.length(); i++) {
@@ -182,7 +188,9 @@ int main() {
         break;
     case 2:
         CLEAR_TERMINAL();
-        BEEPBOARD();
+        BEEPBOARD(sounds_history);
+        std::cout << std::endl;
+        std::cout << "history: " << sounds_history;
         break;
     default:
         break;
