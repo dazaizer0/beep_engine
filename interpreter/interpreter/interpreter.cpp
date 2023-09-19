@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+
 int main() {
 
     std::ifstream file("main.txt");
@@ -19,16 +20,28 @@ int main() {
 
         commands.push_back(com);
     }
+    file.close();
 
     for (int i = 0; i < commands.size(); i++) {
 
-        if (commands[i] == "out" && commands[i + 2] == "->") {
+        std::cout << commands[i];
+        /*if (commands[i] == "out") {
 
-            std::cout << commands[i + 1];
-        }
+            std::string output = "";
+            int j = i;
+
+            while (commands[j] != ";") {
+
+                int temp_int = std::stoi(commands[j]);
+                char temp_char = static_cast<char>(temp_int);
+                output += temp_char;
+                j++;
+            }
+
+            std::cout << output;
+        }*/
     }
 
-    file.close();
     return 0;
 }
 
