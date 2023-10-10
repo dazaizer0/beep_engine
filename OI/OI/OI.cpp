@@ -13,6 +13,7 @@ public:
 
 	void echo_position() {
 		std::cout << "x: " << position.x << ", y: " << position.y << ", z: " << position.z << std::endl;
+		std::cout << std::endl;
 	}
 };
 
@@ -41,14 +42,14 @@ int main() {
 	std::cout << sizeof(vector2) << std::endl;
 
 	std::cout << sizeof(Container2<int>) << std::endl;
+	std::cout << std::endl;
+
 	Container2<int> Container2Table[3] = { Container2<int>(2, 4), Container2<int>(4, 8), Container2<int>(8, 16) };
 	Container2<int>* Container2TablePointer = Container2Table;
 	for (int i = 0; i < sizeof(Container2Table) / sizeof(Container2Table[0]); i++) {
 		Container2<int> Container2Element = Container2TablePointer[i];
 
-		std::cout << std::endl;
-		std::cout << "> " << i + 1 << ":" << std::endl;
-		std::cout << Container2TablePointer << " - " << Container2Element.a << std::endl;
+		std::cout << "> " << i + 1 << ":\n" << Container2TablePointer << " - " << Container2Element.a << std::endl;
 		std::cout << Container2TablePointer << " - " << Container2Element.b << std::endl;
 		std::cout << std::endl;
 	}
