@@ -40,7 +40,26 @@ int main() {
 	std::cout << &vector2 << std::endl;
 	std::cout << sizeof(vector2) << std::endl;
 
-	/*
+	std::cout << sizeof(Container2<int>) << std::endl;
+	Container2<int> Container2Table[3] = { Container2<int>(2, 4), Container2<int>(4, 8), Container2<int>(8, 16) };
+	Container2<int>* Container2TablePointer = Container2Table;
+	for (int i = 0; i < sizeof(Container2Table) / sizeof(Container2Table[0]); i++) {
+		Container2<int> Container2Element = Container2TablePointer[i];
+
+		std::cout << std::endl;
+		std::cout << "> " << i + 1 << ":" << std::endl;
+		std::cout << Container2TablePointer << " - " << Container2Element.a << std::endl;
+		std::cout << Container2TablePointer << " - " << Container2Element.b << std::endl;
+		std::cout << std::endl;
+	}
+
+	/*for (Container2<int> container : Container2Table) {
+		std::cout << container.a << ", " << container.b << std::endl;
+	}*/
+	return 0;
+}
+
+/* > RESOURCES:
 	// POINTERS
 	int number = 256;
 	int* pointer = &number;
@@ -56,23 +75,4 @@ int main() {
 	int* tab_pointer = tab;
 	int element = tab_pointer[1];
 	std::cout << tab_pointer << " - " << element << std::endl;
-	*/
-
-	std::cout << sizeof(Container2<int>) << std::endl;
-	Container2<int> Container2Table[3] = { Container2<int>(2, 4), Container2<int>(4, 8), Container2<int>(8, 16) };
-	Container2<int>* Container2TablePointer = Container2Table;
-	for (int i = 0; i < sizeof(Container2Table) / sizeof(Container2Table[0]); i++) {
-		Container2<int> Container2Element = Container2TablePointer[i];
-
-		std::cout << std::endl;
-		std::cout << "> " << i << ":" << std::endl;
-		std::cout << Container2TablePointer << " - " << Container2Element.a << std::endl;
-		std::cout << Container2TablePointer << " - " << Container2Element.b << std::endl;
-		std::cout << std::endl;
-	}
-
-	/*for (Container2<int> container : Container2Table) {
-		std::cout << container.a << ", " << container.b << std::endl;
-	}*/
-	return 0;
-}
+*/
