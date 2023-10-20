@@ -75,9 +75,18 @@ void BEEP_MAP() { // beepengine option 1
     PLAY_SOUNDS(SOUNDS);
 }
 
+void ENTER(int base_frequency) {
+    std::string message = "f, ";
+    std::thread message_thread(PRINT, message);
+    std::thread play_thread(PLAY, base_frequency, 720);
+    message_thread.join();
+    play_thread.join();
+    std::cout << std::flush;
+}
+
 void BEEPBOARD() { // beepengine option 2
     int base_frequency = 300;
-    std::string hello_message = "<- base_frequency, beepboard[play = [f, g, h, j, k], tone_controls[+, -], quit[/]] beepboard <- opt2";
+    std::string hello_message = "<- base_frequency, beepboard[play = [f, g, h, j, k], tone_controls[+, -], quit[/]] beepboard <- opt2: ";
 
     std::cout << base_frequency;
     for (int i = 0; i < hello_message.length(); i++) {
@@ -95,46 +104,56 @@ void BEEPBOARD() { // beepengine option 2
 
             if (key == 'F' || key == 'f') {
                 std::string message = "f, ";
+
                 std::thread message_thread(PRINT, message);
                 std::thread play_thread(PLAY, base_frequency, 720);
                 message_thread.join();
                 play_thread.join();
+
                 std::cout << std::flush;
             }
 
             if (key == 'G' || key == 'g') {
                 std::string message = "g, ";
+
                 std::thread message_thread(PRINT, message);
                 std::thread play_thread(PLAY, base_frequency + 150, 720);
                 message_thread.join();
                 play_thread.join();
+
                 std::cout << std::flush;
             }
 
             if (key == 'H' || key == 'h') {
                 std::string message = "h, ";
+
                 std::thread message_thread(PRINT, message);
                 std::thread play_thread(PLAY, base_frequency + 300, 720);
                 message_thread.join();
                 play_thread.join();
+
                 std::cout << std::flush;
             }
 
             if (key == 'J' || key == 'j') {
                 std::string message = "j, ";
+
                 std::thread message_thread(PRINT, message);
                 std::thread play_thread(PLAY, base_frequency + 450, 720);
                 message_thread.join();
                 play_thread.join();
+
                 std::cout << std::flush;
             }
 
             if (key == 'K' || key == 'k') {
                 std::string message = "k, ";
+
                 std::thread message_thread(PRINT, message);
                 std::thread play_thread(PLAY, base_frequency + 550, 720);
                 message_thread.join();
                 play_thread.join();
+
                 std::cout << std::flush;
             }
 
