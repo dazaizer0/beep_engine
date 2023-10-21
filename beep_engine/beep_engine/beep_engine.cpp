@@ -39,6 +39,7 @@ private:
 void PLAY_SOUNDS(std::map<int, SOUND> SOUNDS) {
     for (const auto& sound : SOUNDS) {
         PLAY(sound.second.getFrequency(), sound.second.getDuration());
+        std::cout << std::flush;
     }
 }
 
@@ -61,9 +62,9 @@ void BEEP_MAP() { // beepengine option 1
         double frequency;
         int duration;
 
-        std::cout << i << " > frequency (Hz): ";
+        std::cout << i + 1 << " > frequency (Hz): ";
         std::cin >> frequency;
-        std::cout << i << " > duration (ms): ";
+        std::cout << i + 1 << " > duration (ms): ";
         std::cin >> duration;
 
         std::cout << length - i - 1 << " left" << std::endl;
