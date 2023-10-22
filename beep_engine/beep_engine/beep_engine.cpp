@@ -196,8 +196,92 @@ void BEEPBOARD() { // beepengine option 2
     }
 }
 
-void BEEP_ENGINE() {
+void BEEP_ENGINE(char key, int base_frequency, int counter) {
+    if (key == 'F' || key == 'f') {
+        std::string message = "f, ";
 
+        std::thread message_thread(PRINT, message);
+        std::thread play_thread(PLAY, base_frequency, 720);
+        message_thread.join();
+        play_thread.join();
+
+        std::cout << std::flush;
+    }
+
+    if (key == 'G' || key == 'g') {
+        std::string message = "g, ";
+
+        std::thread message_thread(PRINT, message);
+        std::thread play_thread(PLAY, base_frequency + 150, 720);
+        message_thread.join();
+        play_thread.join();
+
+        std::cout << std::flush;
+    }
+
+    if (key == 'H' || key == 'h') {
+        std::string message = "h, ";
+
+        std::thread message_thread(PRINT, message);
+        std::thread play_thread(PLAY, base_frequency + 300, 720);
+        message_thread.join();
+        play_thread.join();
+
+        std::cout << std::flush;
+    }
+
+    if (key == 'J' || key == 'j') {
+        std::string message = "j, ";
+
+        std::thread message_thread(PRINT, message);
+        std::thread play_thread(PLAY, base_frequency + 450, 720);
+        message_thread.join();
+        play_thread.join();
+
+        std::cout << std::flush;
+    }
+
+    if (key == 'K' || key == 'k') {
+        std::string message = "k, ";
+
+        std::thread message_thread(PRINT, message);
+        std::thread play_thread(PLAY, base_frequency + 550, 720);
+        message_thread.join();
+        play_thread.join();
+
+        std::cout << std::flush;
+    }
+
+    if (key == '+') {
+        if (base_frequency < 1000) {
+            base_frequency += 100;
+            std::cout << "i = up, bf = " << base_frequency << ", ";
+            std::cout << std::flush;
+        }
+        else {
+            std::cout << "i = none, bf = " << base_frequency << ", ";
+            std::cout << std::flush;
+        }
+    }
+
+    if (key == '-') {
+        if (base_frequency > 200) {
+            base_frequency -= 100;
+            std::cout << "o = down, bf = " << base_frequency << ", ";
+            std::cout << std::flush;
+        }
+        else {
+            std::cout << "o = none, bf = " << base_frequency << ", ";
+            std::cout << std::flush;
+        }
+    }
+
+    if (counter >= 12) {
+        std::cout << std::endl;
+        counter = 0;
+    }
+
+    counter += 1;
 }
 
 void CLEAR_TERMINAL() {
@@ -209,8 +293,11 @@ void CLEAR_TERMINAL() {
 }
 
 int main() {
+    int base_frequency = 300;
+    char key;
+    int counter = 0;
     int option;
-    std::string hello_message = "[1 - beep_map], [2 - beepboard], [3 - beep_engine]: ";
+    std::string hello_message = "[1 - beep_map], [2 - beepboard], [3 - beep_engine/beepboard2]: ";
 
     for (int i = 0; i < hello_message.length(); ++i) {
         std::cout << hello_message[i];
@@ -234,7 +321,18 @@ int main() {
     case 3: // bee_engine
         CLEAR_TERMINAL();
         std::cout << "beep_engine is starting..." << std::endl;
-        BEEP_ENGINE();
+        while (true) {
+            if (_kbhit()) {  // check if key have been pressed
+                key = _getch();  // get key
+                if (key == '/') {
+                    break;
+                }
+                else {
+                    std::thread beep(BEEP_ENGINE, key, base_frequency, counter);
+                    beep.join();
+                }
+            }
+        }
         break;
 
     default:
