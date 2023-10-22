@@ -49,7 +49,7 @@ void BEEP_MAP() { // beepengine option 1
 
     std::string hello_message = "beep_map <- opt2";
 
-    for (int i = 0; i < hello_message.length(); i++) {
+    for (int i = 0; i < hello_message.length(); ++i) {
         std::cout << hello_message[i];
         Sleep(25);
     }
@@ -58,7 +58,7 @@ void BEEP_MAP() { // beepengine option 1
     std::cout << "Length of sounds map: ";
     std::cin >> length;
 
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i < length; ++i) {
         double frequency;
         int duration;
 
@@ -87,10 +87,10 @@ void ENTER(int base_frequency) {
 
 void BEEPBOARD() { // beepengine option 2
     int base_frequency = 300;
-    std::string hello_message = "<- base_frequency, beepboard[play = [f, g, h, j, k], tone_controls[+, -], quit[/]] beepboard <- opt2: ";
+    std::string hello_message = " <- base_frequency, beepboard[play = [f, g, h, j, k], tone_controls[+, -], quit[/]: ";
 
     std::cout << base_frequency;
-    for (int i = 0; i < hello_message.length(); i++) {
+    for (int i = 0; i < hello_message.length(); ++i) {
         std::cout << hello_message[i];
         std::cout << std::flush;
         Sleep(25);
@@ -196,6 +196,10 @@ void BEEPBOARD() { // beepengine option 2
     }
 }
 
+void BEEP_ENGINE() {
+
+}
+
 void CLEAR_TERMINAL() {
 #ifdef _WIN32
     system("cls");
@@ -206,9 +210,9 @@ void CLEAR_TERMINAL() {
 
 int main() {
     int option;
-    std::string hello_message = "[1 - beep_map], [2 - beepboard]: ";
+    std::string hello_message = "[1 - beep_map], [2 - beepboard], [3 - beep_engine]: ";
 
-    for (int i = 0; i < hello_message.length(); i++) {
+    for (int i = 0; i < hello_message.length(); ++i) {
         std::cout << hello_message[i];
         Sleep(25);
     }
@@ -220,11 +224,19 @@ int main() {
         CLEAR_TERMINAL();
         BEEP_MAP();
         break;
+
     case 2: // beepboard
         CLEAR_TERMINAL();
         BEEPBOARD();
         std::cout << std::endl;
         break;
+
+    case 3: // bee_engine
+        CLEAR_TERMINAL();
+        std::cout << "beep_engine is starting..." << std::endl;
+        BEEP_ENGINE();
+        break;
+
     default:
         break;
     }
