@@ -1,12 +1,12 @@
 ﻿#include "beep.h"
 
 
-void PRINT(const std::string message) {
+void PRINT(const std::string& message) {
     std::cout << message;
 }
 
-void PLAY(double frequency, int duration) {
-    double period = 1.0 / frequency * 1000000; // T = 1 / f 
+void PLAY(const double frequency, int duration) {
+    const double period = 1.0 / frequency * 1000000; // T = 1 / f 
 
 #ifdef _WIN32
     Beep(static_cast<int>(frequency), duration);
@@ -21,7 +21,7 @@ void PLAY(double frequency, int duration) {
 class SOUND {
 public:
     SOUND() : frequency(0.0), duration(0) {} // default sound constructor
-    SOUND(double f, int d) : frequency(f), duration(d) {}
+    SOUND(const double f, const int d) : frequency(f), duration(d) {}
 
     double getFrequency() const {
         return frequency;
@@ -36,7 +36,7 @@ private:
     int duration;
 };
 
-void PLAY_SOUNDS(std::map<int, SOUND> SOUNDS) {
+void PLAY_SOUNDS(const std::map<int, SOUND>& SOUNDS) {
     for (const auto& sound : SOUNDS) {
         PLAY(sound.second.getFrequency(), sound.second.getDuration());
         std::cout << std::flush;
@@ -47,10 +47,10 @@ void BEEP_MAP() { // beepengine option 1
     std::map<int, SOUND> SOUNDS;
     int length;
 
-    std::string hello_message = "beep_map <- opt2";
+    const std::string hello_message = "beep_map <- opt2";
 
-    for (int i = 0; i < hello_message.length(); ++i) {
-        std::cout << hello_message[i];
+    for (const char i : hello_message) {
+        std::cout << i;
         Sleep(25);
     }
     std::cout << std::endl;
@@ -69,7 +69,7 @@ void BEEP_MAP() { // beepengine option 1
 
         std::cout << length - i - 1 << " left" << std::endl;
 
-        SOUND temp_sound(frequency, duration);
+        const SOUND temp_sound(frequency, duration);
         SOUNDS[i] = temp_sound;
     }
 
@@ -90,8 +90,8 @@ void BEEPBOARD() { // beepengine option 2
     std::string hello_message = " <- base_frequency, beepboard[play = [f, g, h, j, k], tone_controls[+, -], quit[/]: ";
 
     std::cout << base_frequency;
-    for (int i = 0; i < hello_message.length(); ++i) {
-        std::cout << hello_message[i];
+    for (char i : hello_message) {
+        std::cout << i;
         std::cout << std::flush;
         Sleep(25);
     }
@@ -196,7 +196,7 @@ void BEEPBOARD() { // beepengine option 2
     }
 }
 
-void BEEP_ENGINE(char key, int base_frequency, int counter) {
+void BEEP_ENGINE(const char key, int base_frequency, int &counter) {
     if (key == 'F' || key == 'f') {
         std::string message = "f, ";
 
@@ -286,7 +286,7 @@ void BEEP_ENGINE(char key, int base_frequency, int counter) {
 
 void CLEAR_TERMINAL() {
 #ifdef _WIN32
-    system("cls");
+    system("cls"); // thread-unsafe
 #else
     system("clear");
 #endif
@@ -294,13 +294,12 @@ void CLEAR_TERMINAL() {
 
 int main() {
     int base_frequency = 300;
-    char key;
     int counter = 0;
     int option;
-    std::string hello_message = "[1 - beep_map], [2 - beepboard], [3 - beep_engine/beepboard2]: ";
+    const std::string hello_message = "[1 - beep_map], [2 - beepboard], [3 - beep_engine/beepboard2]: ";
 
-    for (int i = 0; i < hello_message.length(); ++i) {
-        std::cout << hello_message[i];
+    for (const char i : hello_message) {
+        std::cout << i;
         Sleep(25);
     }
     std::cout << std::endl;
@@ -322,15 +321,15 @@ int main() {
         CLEAR_TERMINAL();
         std::cout << "beep_engine is starting..." << std::endl;
         while (true) {
-            if (_kbhit()) {  // check if key have been pressed
-                key = _getch();  // get key
+            if (_kbhit()) {
+                // check if key have been pressed
+                char key = _getch();  // get key
                 if (key == '/') {
                     break;
                 }
-                else {
-                    std::thread beep(BEEP_ENGINE, key, base_frequency, counter);
-                    beep.join();
-                }
+
+                std::thread beep(BEEP_ENGINE, key, base_frequency, counter);
+                beep.join();
             }
         }
         break;
