@@ -1,13 +1,14 @@
 # BEEP ENGINE
 ## Description
 
-**beep_engine** is a sound engine written in C++, designed to generate sounds and beat music in a flexible and effective way. The engine offers a number of functions enabling the creation of interactive and visually attractive sound experiences, such as: beepmap, beeplist, beepboard.
+**beep_engine** is a sound engine written in C++, designed to generate sounds and beat music in a flexible and effective way. The engine offers a number of functions, such as: beepmap, beeplist, beepboard.
 
 ## Functions
 
-- **Sound Generation:** Create a variety of sounds and musical sequences with ease.
+- **Sound Generation:** Create a variety of sounds.
 - **Super Advanced Visual Effects:** Such as different text colors in the app.
 - **Easy Integration:** Simple interface allowing easy operation of the engine.
+- **Flexibility** You decide in what way you use this engine.
 
 ## Usage Examples
 
