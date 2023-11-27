@@ -11,10 +11,11 @@
 
 ## Usage Examples
 
-### Beep Sound Generation
-### Generating Sound Lists
-### Playing the beepboard
-### Insight into project history
+- Beep Sound Generation
+- Generating Sound Nodes
+- Playing at the beepboard
+- Insight into project history
 
-- Releases: https://github.com/dazaizer0/beep_engine/releases
-- YouTube: https://www.youtube.com/watch?v=SR9o-bbsb_k&t=6s
+## REFERENCES
+- **Releases:** https://github.com/dazaizer0/beep_engine/releases
+- **YouTube:** https://www.youtube.com/watch?v=SR9o-bbsb_k&t=6s
