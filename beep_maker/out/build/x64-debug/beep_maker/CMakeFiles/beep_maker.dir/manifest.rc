@@ -1,0 +1,2 @@
+#pragma code_page(65001)
+1 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "C:/Users/mydat/Documents/_active_c/_cpp/beep_maker/out/build/x64-debug/beep_maker/CMakeFiles/beep_maker.dir/embed.manifest"

@@ -1,0 +1,5 @@
+C:/Users/mydat/Documents/_active_c/_cpp/beep_maker/out/build/x64-debug/CMakeFiles/edit_cache.dir
+C:/Users/mydat/Documents/_active_c/_cpp/beep_maker/out/build/x64-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/mydat/Documents/_active_c/_cpp/beep_maker/out/build/x64-debug/beep_maker/CMakeFiles/beep_maker.dir
+C:/Users/mydat/Documents/_active_c/_cpp/beep_maker/out/build/x64-debug/beep_maker/CMakeFiles/edit_cache.dir
+C:/Users/mydat/Documents/_active_c/_cpp/beep_maker/out/build/x64-debug/beep_maker/CMakeFiles/rebuild_cache.dir
