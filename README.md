@@ -11,13 +11,12 @@
 - **Super Advanced Visual Effects:** Such as different text colors in the app.
 - **Easy Integration:** Simple interface allowing easy operation of the engine.
 - **Flexibility** You decide in what way you use this engine.
+- **Insight into project history**
 
 ## Usage Examples
 
-- Beep Sound Generation
-- Generating Sound Nodes
+- Making beep music
 - Playing at the beepboard
-- Insight into project history
 
 ## REFERENCES
 - **Releases:** https://github.com/dazaizer0/beep_engine/releases
