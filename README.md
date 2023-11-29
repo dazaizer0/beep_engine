@@ -16,7 +16,6 @@
 ## Usage Examples
 
 - Making beep music
-- Playing at the beepboard
 
 ## REFERENCES
 - **Releases:** https://github.com/dazaizer0/beep_engine/releases
