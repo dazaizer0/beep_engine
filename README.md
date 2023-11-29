@@ -3,7 +3,7 @@
 
 **beep_engine** is a sound engine written in C++, designed to generate sounds and beat music in a flexible and effective way. The engine offers a number of functions, such as: beepmap, beeplist, beepboard.
 
-**Download:** https://github.com/dazaizer0/beep_engine/tree/main/beep_engine/out/build/x64-debug/beep_engine
+**Download:** [here](https://github.com/dazaizer0/beep_engine/releases/tag/v1.1.1)
 
 ## Functions
 
