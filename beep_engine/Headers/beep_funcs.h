@@ -1,5 +1,15 @@
 #include "beep_libs.h"
 
+/*
+
+#ifdef _WIN32
+    #include <Windows.h>
+    #include <windows.h>
+#else
+    #include <unistd.h>
+#endif
+
+*/
 
 void PRINT(const std::string& message)
 {
